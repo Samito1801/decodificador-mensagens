@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criador e Decodificador de Mensagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criador e Decodificador de Mensagens</h1>
+    
+    <h2>Codificar Mensagem</h2>
+    <input type="text" id="mensagemCodificar" placeholder="Digite a mensagem para codificar">
+    <button onclick="codificar()">Codificar</button>
+    <div id="resultadoCodificar"></div>
+
+    <h2>Decodificar Mensagem</h2>
+    <input type="text" id="mensagemDecodificar" placeholder="Digite a mensagem para decodificar">
+    <button onclick="decodificar()">Decodificar</button>
+    <div id="resultadoDecodificar"></div>
+
+    <script>
+        const substituicoes = {
+            'A': 'B', 'B': 'C', 'C': 'D', 
+            'D': 'E', 'E': 'F', 'F': 'G', 
+            'G': 'H', 'H': 'I', 'I': 'J', 
+            'J': 'K', 'K': 'L', 'L': 'M', 
+            'M': 'N', 'N': 'O', 'O': 'P', 
+            'P': 'Q', 'Q': 'R', 'R': 'S', 
+            'S': 'T', 'T': 'U', 'U': 'V', 
+            'V': 'W', 'W': 'X', 'X': 'Y', 
+            'Y': 'Z', 'Z': 'A'
+        };
+
+        function codificar() {
+            let texto = document.getElementById("mensagemCodificar").value.toUpperCase();
+            let resultado = "";
+
+            for (let letra of texto) {
+                resultado += substituicoes[letra] || letra; // Mantém a letra original se não houver substituição
+            }
+
+            document.getElementById("resultadoCodificar").innerText = "Mensagem Codificada: " + resultado;
+        }
+
+        function decodificar() {
+            let texto = document.getElementById("mensagemDecodificar").value.toUpperCase();
+            let resultado = "";
+
+            for (let letra of texto) {
+                // Reverte a substituição
+                const letraDecodificada = Object.keys(substituicoes).find(key => substituicoes[key] === letra);
+                resultado += letraDecodificada || letra; // Mantém a letra original se não houver substituição
+            }
+
+            document.getElementById("resultadoDecodificar").innerText = "Mensagem Decodificada: " + resultado;
+        }
+    </script>
+</body>
+</html>
